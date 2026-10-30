@@ -1,0 +1,327 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Nderon Beqiri | Movie Database</title>
+
+    <link rel="stylesheet" type="text/css" href="dbicw.css">
+    <script type="text/javascript" src="dbicw.js"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #f4f6fb;
+            color: #202b3c;
+            min-height: 100vh;
+        }
+
+        header {
+            background: #17243a;
+            color: white;
+            padding: 30px 8%;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+        }
+
+        header h1 {
+            font-size: 26px;
+            font-weight: 650;
+            letter-spacing: -0.5px;
+        }
+
+        header p {
+            color: #aebbd0;
+            margin-top: 7px;
+            font-size: 14px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 45px auto;
+            padding: 0 25px;
+        }
+
+        .section-title {
+            font-size: 21px;
+            margin-bottom: 20px;
+            color: #17243a;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 22px;
+            margin-bottom: 40px;
+        }
+
+        .card {
+            background: white;
+            padding: 27px;
+            border-radius: 12px;
+            border: 1px solid #e8ecf3;
+            box-shadow: 0 4px 15px rgba(25, 40, 65, 0.04);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 22px rgba(25, 40, 65, 0.08);
+        }
+
+        .card h3 {
+            font-size: 17px;
+            margin-bottom: 8px;
+            color: #17243a;
+        }
+
+        .card p {
+            color: #8792a4;
+            font-size: 13px;
+            margin-bottom: 22px;
+        }
+
+        label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #45536a;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid #dce2ec;
+            border-radius: 7px;
+            outline: none;
+            font-size: 14px;
+            color: #202b3c;
+            background: #fbfcfe;
+            margin-bottom: 17px;
+            transition: border 0.2s, box-shadow 0.2s;
+        }
+
+        input[type="text"]:focus {
+            border-color: #3978e8;
+            box-shadow: 0 0 0 3px rgba(57, 120, 232, 0.12);
+            background: white;
+        }
+
+        input[type="submit"] {
+            border: none;
+            background: #3978e8;
+            color: white;
+            padding: 11px 22px;
+            border-radius: 7px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        input[type="submit"]:hover {
+            background: #2863ca;
+        }
+
+        .delete-button {
+            background: #e05252 !important;
+        }
+
+        .delete-button:hover {
+            background: #c83c3c !important;
+        }
+
+        .insert-button {
+            background: #21976b !important;
+        }
+
+        .insert-button:hover {
+            background: #187b56 !important;
+        }
+
+        .full-width {
+            grid-column: span 2;
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            color: #929bad;
+            font-size: 13px;
+            border-top: 1px solid #e7ebf2;
+            margin-top: 50px;
+        }
+
+        @media (max-width: 700px) {
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .full-width {
+                grid-column: span 1;
+            }
+
+            header {
+                padding: 25px;
+            }
+
+            .container {
+                margin: 30px auto;
+                padding: 0 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>Movie Database</h1>
+    <p>Manage your movies, actors and database records.</p>
+</header>
+
+<div class="container">
+
+    <!-- SEARCH SECTION -->
+    <h2 class="section-title">Search Database</h2>
+
+    <div class="card-grid">
+
+        <div class="card">
+            <h3>Search Movies</h3>
+            <p>Find a movie using its title.</p>
+
+            <form action="search_movie_example.php"
+                  onSubmit="return validate(this)">
+
+                <label>Movie Title</label>
+                <input type="text" name="title"
+                       placeholder="Enter movie title">
+
+                <input type="submit" value="Search Movies">
+            </form>
+        </div>
+
+        <div class="card">
+            <h3>Search Actors</h3>
+            <p>Find an actor using their name.</p>
+
+            <form action="search_actor_example.php"
+                  onSubmit="return validate(this)">
+
+                <label>Actor Name</label>
+                <input type="text" name="actName"
+                       placeholder="Enter actor name">
+
+                <input type="submit" value="Search Actors">
+            </form>
+        </div>
+
+    </div>
+
+    <!-- DELETE SECTION -->
+    <h2 class="section-title">Delete Records</h2>
+
+    <div class="card-grid">
+
+        <div class="card">
+            <h3>Delete Movie</h3>
+            <p>Remove a movie from the database.</p>
+
+            <form action="delete_movie_example.php"
+                  onSubmit="return validate(this)">
+
+                <label>Movie Title</label>
+                <input type="text" name="title"
+                       placeholder="Enter movie title">
+
+                <input type="submit" value="Delete Movie"
+                       class="delete-button">
+            </form>
+        </div>
+
+        <div class="card">
+            <h3>Delete Actor</h3>
+            <p>Remove an actor using their database ID.</p>
+
+            <form action="delete_actor_example.php"
+                  onSubmit="return validate(this)">
+
+                <label>Actor ID</label>
+                <input type="text" name="actID"
+                       placeholder="Enter actor ID">
+
+                <input type="submit" value="Delete Actor"
+                       class="delete-button">
+            </form>
+        </div>
+
+    </div>
+
+    <!-- INSERT SECTION -->
+    <h2 class="section-title">Add New Records</h2>
+
+    <div class="card-grid">
+
+        <div class="card">
+            <h3>Insert Actor</h3>
+            <p>Add a new actor to the database.</p>
+
+            <form action="insert_actor_example.php"
+                  onSubmit="return validate(this)">
+
+                <label>Actor Name</label>
+                <input type="text" name="actorAdd"
+                       placeholder="Enter actor name">
+
+                <input type="submit" value="Add Actor"
+                       class="insert-button">
+            </form>
+        </div>
+
+        <div class="card">
+            <h3>Insert Movie</h3>
+            <p>Add a new movie and its associated details.</p>
+
+            <form action="insert_movie_example.php"
+                  onSubmit="return validate(this)">
+
+                <label>Movie Title</label>
+                <input type="text" name="movieAdd"
+                       placeholder="Enter movie title">
+
+                <label>Movie Genre</label>
+                <input type="text" name="genreAdd"
+                       placeholder="Enter movie genre">
+
+                <label>Movie Price</label>
+                <input type="text" name="priceAdd"
+                       placeholder="Enter movie price">
+
+                <label>Actor ID</label>
+                <input type="text" name="actorIDAdd"
+                       placeholder="Enter actor ID">
+
+                <input type="submit" value="Add Movie"
+                       class="insert-button">
+            </form>
+        </div>
+
+    </div>
+
+</div>
+
+<footer>
+    Movie Database Management System | Nderon Beqiri
+</footer>
+
+</body>
+</html>
